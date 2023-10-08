@@ -1,8 +1,8 @@
 #include <unistd.h>
 /**
- * main - the Entery point
- *
- * Return: complete successfully
+* main - the Entery point
+*
+* Return: complete successfully
 */
 int main(void)
 {
