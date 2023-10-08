@@ -10,7 +10,10 @@ int main(void)
 
 	while (x <= 9)
 	{
-		putchar(' ');
+		if (x != 0)
+		{
+			putchar(' ');
+		}
 
 		putchar(x + '0');
 
