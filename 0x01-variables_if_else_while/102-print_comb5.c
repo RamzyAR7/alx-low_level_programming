@@ -7,50 +7,40 @@
  */
 int main(void)
 {
-    int w = 0;
-    int x = 0;
-    int y = 0;
-    int z = 0;
+	int x = 0;
+	int y;
 
-    while (w < 10)
-    {
-		x = 0;
-        while (x < 9)
-        {
-			y = 0;
-            while (y < 10)
-            {
-				z = y + 1;
-                while (z < 10)
-                {
-                    if (w != 0 || x != 0 || y != 0 || z != 0)
-                    {
-                        putchar(' ');
-                    }
-                    putchar(w + '0');
-                    putchar(x + '0');
-                    putchar(' ');
-                    putchar(y + '0');
-                    putchar(z + '0');
+	while (x < 100)
+	{
+		y = x + 1;
 
-                    if (w != 9 || x != 8 || y != 9 || z != 9)
-                    {
-                        putchar(',');
-                    }
+		while (y < 100)
+		{
+			if (x != 00 || y != 01)
+			{
+				putchar(' ');
+			}
+			putchar((x / 10) + '0');
+			putchar((x % 10) + '0');
+			putchar(' ');
+			putchar((y / 10) + '0');
+			putchar((y % 10) + '0');
 
-                    z++;
-                }
-                
-                y++;
-            }
+			if (x != 98 || y != 99)
+			{
+				putchar(',');
+			}
 
-            x++;
-        }
-        
-        w++;
-    }
+			y++;
+		}
 
-    putchar('\n');
+		x++;
 
-    return (0);
+	}
+
+	putchar('\n');
+
+
+	return (0);
 }
+
