@@ -15,12 +15,12 @@ int main(void)
     while (w < 10)
     {
 		x = 0;
-        while (x < 10)
+        while (x < 9)
         {
 			y = 0;
-            while (y < 9)
+            while (y < 10)
             {
-				z = 0;
+				z = y + 1;
                 while (z < 10)
                 {
                     if (w != 0 || x != 0 || y != 0 || z != 0)
@@ -36,7 +36,6 @@ int main(void)
                     if (w != 9 || x != 8 || y != 9 || z != 9)
                     {
                         putchar(',');
-                        putchar(' ');
                     }
 
                     z++;
