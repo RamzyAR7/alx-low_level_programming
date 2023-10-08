@@ -7,7 +7,7 @@
 int main(void)
 {
 	int num = 0;
-	int hex;
+	int hexa;
 
 	while (num <= 15)
 	{
@@ -17,9 +17,9 @@ int main(void)
 		}
 		else if (num > 9)
 		{
-			hex = num + 87;
+			hexa = num + 87;
 
-			putchar(hex);
+			putchar(hexa);
 		}
 
 		num++;
