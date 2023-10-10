@@ -5,7 +5,7 @@
 */
 void times_table(void)
 {
-	int num = 0;
+	int num;
 	int x = 0;
 	int y = 0;
 
@@ -13,12 +13,32 @@ void times_table(void)
 	{
 		while (y < 10)
 		{
-			
-			_putchar(num * x + '0');
-			
-			
+
+			num = x * y;
+
+			if (y != 0)
+			{
+				_putchar(',');
+				_putchar(' ');
+			}
+			if (num >= 10)
+			{
+				_putchar(num / 10 + '0');
+				_putchar(num % 10 + '0');
+			}
+			else if (num < 10 && y != 0)
+			{
+				_putchar(' ');
+				_putchar(num  % 10 + '0');
+			}
+			else
+			{
+				_putchar(num  % 10 + '0');
+			}
 		}
-		
+
+		_putchar('\n');
+
 	}
-	
+
 }
