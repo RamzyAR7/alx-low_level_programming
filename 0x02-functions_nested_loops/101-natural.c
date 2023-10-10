@@ -18,8 +18,7 @@ int main(void)
 			sum += x;
 	}
 
-	_putchar(sum + '0');
-	_putchar('\n');
+	printf("%d\n", sum);
 
 	return (0);
 }
