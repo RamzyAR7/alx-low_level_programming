@@ -12,7 +12,9 @@ int main(void)
 
 	printf("%lu, %lu", b1, b2);
 
-	for (unsigned int i = 3; i <= 98; i++)
+	unsigned int i;
+
+	for (i = 3; i <= 98; i++)
 	{
 		b1_temp = b1;
 		b2_temp = b2;
