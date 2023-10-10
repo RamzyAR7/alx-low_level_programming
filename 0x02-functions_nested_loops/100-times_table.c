@@ -23,7 +23,7 @@ void print_times_table(int n)
 				if (y != 0)
 				{
 					_putchar(',');
-					_putchar(' ');
+					_putchar('  ');
 				}
 				if (num >= 10)
 				{
