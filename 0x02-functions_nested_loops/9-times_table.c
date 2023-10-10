@@ -35,10 +35,12 @@ void times_table(void)
 			{
 				_putchar(num  % 10 + '0');
 			}
+
+			y++;
 		}
 
 		_putchar('\n');
-
+		x++;
 	}
 
 }
