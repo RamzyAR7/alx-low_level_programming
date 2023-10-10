@@ -27,7 +27,7 @@ int main(void)
 
 		if (c == 49)
 		{
-				printf("\n");
+			printf("\n");
 		}
 		else
 		{
