@@ -11,9 +11,9 @@
 
 int main(void)
 {
-	unsigned int f1 = 0;
-	unsigned int f2 = 1;
-	unsigned int sum;
+	unsigned long f1 = 0;
+	unsigned long f2 = 1;
+	unsigned long sum;
 
 	int c;
 
