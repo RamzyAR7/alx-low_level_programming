@@ -13,9 +13,9 @@ void print_times_table(int n)
 
 	if (n <= 15 && n >= 0)
 	{
-		while (x <= n) // Change here
+		while (x <= n)
 		{
-			while (y <= n) // And here
+			while (y <= n)
 			{
 
 				num = x * y;
