@@ -3,31 +3,27 @@
  * main - Entry point
  * Fizz-Buzz test
  * Return: Always 0 (success)
-*/
+ */
 int main(void)
 {
 	int i;
 
-	for (i = 1; i < 100; i++)
+	for (i = 1; i <= 100; i++)
 	{
-		if (i % 3 == 0 && i % 5 == 0)
-		{
-			printf("FizzBuzz ");
-		}
-		else if (i % 3 == 0)
-		{
-			printf("Fizz ");
-		}
-		else if (i % 5 == 0)
-		{
-			printf("Buzz ");
-		}
-		else
-		{
-			printf("%d ", i);
-		}
 
+		/*for fizz*/
+		if (i % 3 == 0)
+			printf("Fizz");
+		/*for buzz*/
+		if (i % 5 == 0)
+			printf("Buzz");
+		/*for else number*/
+		if (i % 3 != 0 && i % 5 != 0)
+			printf("%d", i);
+		/*to do not add space*/
+		if (i < 100)
+			printf(" ");
 	}
-	printf("Buzz\n");
+	printf("\n");
 	return (0);
 }
