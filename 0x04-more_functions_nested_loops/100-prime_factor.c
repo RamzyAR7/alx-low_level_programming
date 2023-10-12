@@ -1,54 +1,55 @@
-/**
- * largest_prime - finds and prints the largest
- *	prime factor of number (number)
- *
- * @number: number to find
- */
-
-void largest_prime(long int number)
-{
-	int primenum, larg;
-
-	while (number % 2 == 0)
-		number = number / 2;
-
-	for (primenum = 3; primenum <= _square(number); primenum += 2)
-	{
-		while (number % primenum == 0)
-		{
-			number = number / primenum;
-			larg = primenum;
-		}
-	}
-
-	if (number > 2)
-		larg = number;
-	printf("%d\n", larg);
-}
 #include <stdio.h>
 
 /**
- * _square - finds the square root
+ * _sqrt - finds the square root
  *
- * @i: input number
+ * @x: input number
  *
  * Return: square root of x
  *
  */
 
-double _square(double i)
+double _sqrt(double x)
 {
-	float square, x;
+	float sqrt, tmp;
 
-	x = 0;
-	square = i / 2;
+	sqrt = x / 2;
+	tmp = 0;
 
-	while (square != x)
+	while (sqrt != tmp)
 	{
-		x = square;
-		square = (i / x + x) / 2;
+		tmp = sqrt;
+		sqrt = (x / tmp + tmp) / 2;
 	}
-	return (square);
+	return (sqrt);
+}
+
+/**
+ * largest_prime_factor - finds and prints the largest
+ *			prime factor of number (num)
+ *
+ * @num: number to find
+ */
+
+void largest_prime_factor(long int num)
+{
+	int prmNu, largest;
+
+	while (num % 2 == 0)
+		num = num / 2;
+
+	for (prmNu = 3; prmNu <= _sqrt(num); prmNu += 2)
+	{
+		while (num % prmNu == 0)
+		{
+			num = num / prmNu;
+			largest = prmNu;
+		}
+	}
+
+	if (num > 2)
+		largest = num;
+	printf("%d\n", largest);
 }
 
 /**
@@ -59,7 +60,7 @@ double _square(double i)
 int main(void)
 {
 
-	largest_prime(612852475143);
+	largest_prime_factor(612852475143);
 
 	return (0);
 }
