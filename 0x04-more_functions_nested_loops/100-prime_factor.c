@@ -11,44 +11,49 @@
 
 double _square(double i)
 {
-	float sqr, tmp;
+	float sqr, tmep;
 
+	tmep = 0;
 	sqr = i / 2;
-	tmp = 0;
 
-	while (sqr != tmp)
+	while (sqr != tmep)
 	{
-		tmp = sqr;
-		sqr = (i / tmp + tmp) / 2;
+		tmep = sqr;
+		sqr = (i / tmep + tmep) / 2;
 	}
 	return (sqr);
 }
 
 /**
  * largest_prime - finds and prints the largest
- *			prime factor of number (num)
+ *			prime factor of number (n)
  *
- * @num: number to find
+ * @n: number to find
  */
 
-void largest_prime(long int num)
+void largest_prime(long int n)
 {
 	int prmnu, largest;
 
-	while (num % 2 == 0)
-		num = num / 2;
-
-	for (prmnu = 3; prmnu <= _square(num); prmnu += 2)
+	while (n % 2 == 0)
 	{
-		while (num % prmnu == 0)
+		n = n / 2;
+	}
+
+	for (prmnu = 3; prmnu <= _square(n); prmnu += 2)
+	{
+		while (n % prmnu == 0)
 		{
-			num = num / prmnu;
+			n = n / prmnu;
 			largest = prmnu;
 		}
 	}
 
-	if (num > 2)
-		largest = num;
+	if (n > 2)
+	{
+		largest = n;
+	}
+
 	printf("%d\n", largest);
 }
 
