@@ -5,7 +5,7 @@
  *
  * @i: input number
  *
- * Return: square root of x
+ * Return: square root of i
  *
  */
 
