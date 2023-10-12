@@ -14,7 +14,7 @@ int main(void)
 		if (i % 3 == 0 && i % 5 == 0)
 		{
 			printf("FuzzBuzz ");
-
+			i++;
 		}
 		else
 		{
@@ -35,7 +35,7 @@ int main(void)
 		}
 
 	}
-
+	_putchar('\n');
 
 	return (0);
 }
