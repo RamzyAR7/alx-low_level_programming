@@ -5,7 +5,7 @@
  * @number: number to find
  */
 
-void largest_prime(long number)
+void largest_prime(long int number)
 {
 	int primenum, larg;
 
