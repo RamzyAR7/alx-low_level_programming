@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stdio.h>
 /**
  * main - Entry point
@@ -29,6 +28,6 @@ int main(void)
 		}
 
 	}
-	printf("Buzz \n");
+	printf("Buzz");
 	return (0);
 }
