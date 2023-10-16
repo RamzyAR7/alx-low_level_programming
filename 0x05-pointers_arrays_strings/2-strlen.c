@@ -8,7 +8,13 @@
 */
 int _strlen(char *s)
 {
-	int length = sizeof(s);
+	int length = 0;
+
+	while (*s != '\n')
+	{
+		length++;
+		s++;
+	}
 
 	return (length);
 }
