@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdbool.h>
 /**
  * _atoi -  a function that convert a string to an integer.
  * @s: pointer of char
@@ -9,30 +8,33 @@
 */
 int _atoi(char *s)
 {
-	int res = 0;
-	bool started = false;
-	int sign = 1;
+	int i = 0;
+	unsigned int nu = 0;
+	int min = 1;
+	int isi = 0;
 
-	for (int i = 0; s[i] != '\0'; i++)
+	while (s[i])
 	{
-		if (s[i] == '-' && !started)
+		if (s[i] == 45)
 		{
-			sign *= -1;
+			min *= -1;
 		}
-		else if (s[i] == '+' && !started)
-		{
-			continue;
-		}
-		else if (s[i] >= '0' && s[i] <= '9')
-		{
-			started = true;
-			res = res * 10 + (s[i] - '0');
-		}
-		else if (started)
-		{
 
+		while (s[i] >= 48 && s[i] <= 57)
+		{
+			isi = 1;
+			nu = (nu * 10) + (s[i] - '0');
+			i++;
+		}
+
+		if (isi == 1)
+		{
 			break;
 		}
+
+		i++;
 	}
-	return (res * sign);
+
+	nu *= min;
+	return (nu);
 }
