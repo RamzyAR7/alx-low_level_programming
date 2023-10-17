@@ -9,18 +9,18 @@
  */
 int main(void)
 {
-	char paswd[84];
+	char passwd[84];
 	int i = 0, sum = 0, x, z;
 
 	srand(time(0));
 
 	while (sum < 2772)
 	{
-		paswd[i] = 33 + rand() % 94;
-		sum += paswd[i++];
+		passwd[i] = 33 + rand() % 94;
+		sum += passwd[i++];
 	}
 
-	paswd[i] = '\0';
+	passwd[i] = '\0';
 
 	if (sum != 2772)
 	{
@@ -29,24 +29,24 @@ int main(void)
 		if ((sum - 2772) % 2 != 0)
 			x++;
 
-		for (i = 0; paswd[i]; i++)
+		for (i = 0; passwd[i]; i++)
 		{
-			if (paswd[i] >= (33 + x))
+			if (passwd[i] >= (33 + x))
 			{
-				paswd[i] -= x;
+				passwd[i] -= x;
 				break;
 			}
 		}
-		for (i = 0; paswd[i]; i++)
+		for (i = 0; passwd[i]; i++)
 		{
-			if (paswd[i] >= (33 + z))
+			if (passwd[i] >= (33 + z))
 			{
-				paswd[i] -= z;
+				passwd[i] -= z;
 				break;
 			}
 		}
 	}
-	printf("%s", paswd);
+	printf("%s", passwd);
 
 	return (0);
 }
