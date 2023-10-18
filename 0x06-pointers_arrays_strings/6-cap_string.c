@@ -10,8 +10,7 @@ char *cap_string(char *a)
 	int i;
 	int x;
 
-	char arr[] = {',', ';', '.', '!', '?'
-	, '"', '(', ')', '{', '}', '\n', '\t', '-', ' '};
+	char arr[] = " \t\n,;.!?\"(){}";
 
 	for (i = 1; a[i] != '\0'; i++)
 	{
@@ -24,7 +23,7 @@ char *cap_string(char *a)
 			}
 			else
 			{
-				for (x = 0; arr[x] != '\0'; x++)
+				for (x = 0; x <= 12; x++)
 				{
 					if (a[i - 1] == arr[x])
 					{
