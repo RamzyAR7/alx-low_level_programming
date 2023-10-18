@@ -9,21 +9,12 @@
 void reverse_array(int *a, int n) /* n = 5 */
 {
 	int i;
+	int swp;
 
-	i = n - 1; /* i --> index */
-
-	while (i >= 0) /* 4 --> 0 */
+	for (i = 0; i < n / 2; i++)
 	{
-		_putchar(a[i]);
-
-		if (i != 0)
-		{
-			_putchar(',');
-			_putchar(' ');
-		}
-
-		i--;
+		swp = a[i];
+		a[i] = a[(n - 1) - i];
+		a[(n - 1) - i] = swp;
 	}
-
-	_putchar('\n');
 }
