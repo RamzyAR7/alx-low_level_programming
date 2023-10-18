@@ -10,25 +10,22 @@ char *cap_string(char *a)
 	int i;
 	int x;
 
-	char arr[] = {',', ';', '.', '!', '?', '"'
-	, '(', ')', '{', '}', '\n', '\t', '-', ' '};
+	char arr[] = {',', ';', '.', '!', '?', '"', '('
+	, ')', '{', '}', '\n', '\t', '-', ' '};
 
 	if (a[0] >= 'a' && a[0] <= 'z')
 	{
 		a[0] -= 32;
 	}
 
-	for (i = 1; a[i] != '\0'; i++)
+	for (i = 1; a[i] != '\0'; i++) /* Start from 1 */
 	{
-
-		if (a[i] >= 'a' && a[i] <= 'z')
+		for (x = 0; arr[x] != '\0'; x++)
 		{
-			for (x = 0; arr[x] != '\0'; x++)
+			if (a[i - 1] == arr[x] && a[i] >= 'a' && a[i] <= 'z')
 			{
-				if (a[i - 1] == arr[x])
-				{
-					a[i] -= 32;
-				}
+				a[i] -= 32;
+				break; /* Break out of the inner loop once a match is found */
 			}
 		}
 	}
