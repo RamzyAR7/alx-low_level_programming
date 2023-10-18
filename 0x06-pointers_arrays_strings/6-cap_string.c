@@ -23,7 +23,7 @@ char *cap_string(char *a)
 			}
 			else
 			{
-				for (x = 0; x <= 12; x++)
+				for (x = 0; arr[x] != '\0'; x++)
 				{
 					if (a[i - 1] == arr[x])
 					{
