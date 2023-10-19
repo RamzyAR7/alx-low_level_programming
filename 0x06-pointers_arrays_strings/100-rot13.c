@@ -13,13 +13,13 @@ char *rot13(char *a)
 	char c1[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char c2[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
-	for (i = 0; *(a + i); i++)
+	for (i = 0; a[i] != '\0'; i++)
 	{
 		for (x = 0; x < 52; x++)
 		{
-			if (c1[x] == *(a + i))
+			if (c1[x] == a[i])
 			{
-				*(a + i) = c2[x];
+				a[i] = c2[x];
 				break;
 			}
 		}
