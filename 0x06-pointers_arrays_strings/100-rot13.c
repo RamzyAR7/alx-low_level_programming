@@ -5,7 +5,7 @@
  *
  * @a: char of array
  *
- * Return: char s
+ * Return: char a
  */
 
 char *rot13(char *a)
@@ -18,7 +18,7 @@ char *rot13(char *a)
 	{
 		for (x = 0; c1[x] != '\0'; x++)
 		{
-			if (c1[x] == a[i])
+			if (a[i] == c1[x])
 			{
 				a[i] = c2[x];
 
