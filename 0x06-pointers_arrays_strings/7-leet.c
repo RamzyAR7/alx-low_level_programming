@@ -3,7 +3,7 @@
  * *leet - a function that encodes a string into 1337.
  * @a: char of array
  * Return: Always char
- * by ramzy
+ * by ahmed ramzy
  */
 char *leet(char *a)
 {
