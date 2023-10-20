@@ -1,9 +1,5 @@
 #include <stdio.h>
-/**
- * main -  program prints a[2] = 98, followed by a new line.
- * Return: int type
- * by ramzy
-*/
+
 int main(void)
 {
 	int n;
