@@ -19,12 +19,11 @@ char *_strstr(char *haystack, char *needle)
 
 	for (index_hay = 0; haystack[index_hay] != '\0'; index_hay++)
 	{
-		hay = haystack;
+		hay = &haystack[index_hay];
 		index_ne = 0;
 
 		while (needle[index_ne] != '\0' && haystack[index_hay] == needle[index_ne])
 		{
-			index_hay++;
 			index_ne++;
 		}
 		if (!needle[index_ne])
