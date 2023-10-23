@@ -10,9 +10,9 @@ char *_strpbrk(char *s, char *accept)
 	int index_s;
 	int index_accept;
 
-	for (index_s = 0; s[index_s] >= '\0'; index_s++)
+	for (index_s = 0; s[index_s] != '\0'; index_s++)
 	{
-		for (index_accept = 0; accept[index_accept] >= '\0'; index_accept++)
+		for (index_accept = 0; accept[index_accept] != '\0'; index_accept++)
 		{
 			if (s[index_s] == accept[index_accept])
 			{
