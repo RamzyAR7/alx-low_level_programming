@@ -4,7 +4,7 @@
  * @s: char of array
  * @c: the char value (byte)
  * Return: Always char
-*/
+ */
 char *_strchr(char *s, char c)
 {
 	int index;
@@ -18,5 +18,4 @@ char *_strchr(char *s, char c)
 	}
 
 	return ('\0');
-
 }
