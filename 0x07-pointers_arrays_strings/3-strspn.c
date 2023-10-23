@@ -18,7 +18,6 @@ unsigned int _strspn(char *s, char *accept)
 			if (s[index_s] == accept[index_accept])
 			{
 				count++;
-				break;
 			}
 		}
 	}
