@@ -1,22 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 /**
  * main - the entry point
  * @argc: the number of command
  * @argv: the array of string
  * Return: Always 0
  */
-int main(int argc __attribute__((unused)), char *argv[])
+int main(int argc, char *argv[])
 {
-	if (argc < 3)
+
+	int mult;
+
+	if (argc == 3)
+	{
+		mult = atoi(argv[1]) * atoi(argv[2]);
+
+		printf("%d\n", mult);
+
+	}
+	else
 	{
 		printf("Error\n");
 
 		return (1);
 	}
-
-	int mult;
-
-	mult = atoi(argv[1]) * atoi(argv[2]);
 
 	return (0);
 }
