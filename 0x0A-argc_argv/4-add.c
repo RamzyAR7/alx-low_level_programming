@@ -8,13 +8,12 @@
  */
 int main(int argc, char *argv[])
 {
-	int i;
 	int sum = 0;
 	char *a;
 
-	for (i = 1; i < argc; i++)
+	while (--argc)
 	{
-		for (*a = argv[i]; *a; a++)
+		for (*a = argv[argc]; *a; a++)
 		{
 			if (*a < '0' || *a > '9')
 			{
@@ -22,7 +21,7 @@ int main(int argc, char *argv[])
 				return (1);
 			}
 
-			sum += atoi(argv[i]);
+			sum += atoi(argv[argc]);
 		}
 	}
 
