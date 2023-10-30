@@ -18,24 +18,29 @@ char *_strdup(char *str)
 		return (NULL);
 	}
 
+	/*to get the length of str*/
 	while (str[length])
 	{
 		length++;
 	}
 
-	c = malloc((length + 1) * sizeof(char));
+	c = malloc((length + 1) * sizeof(char)); /* +1 this for NULL OP*/
 
 	if (c == NULL)
 	{
 		return (NULL);
 	}
 
+	/**
+	 *  we use length instate of c[i] != '\0'
+	 *because there is no array of c are yet init
+	*/
 	for (i = 0; i < length; i++)
 	{
-		c[i] = str[i];
+		c[i] = str[i]; /* to copy and double the string into c*/
 	}
 
-	c[i] = '\0';
+	c[i] = '\0'; /* the last elemnt str[length] = NULL*/
 
 	return (c);
 }
