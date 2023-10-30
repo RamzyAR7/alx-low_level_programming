@@ -18,7 +18,7 @@ char *_strdup(char *str)
 		return (NULL);
 	}
 
-	/*to get the length of str*/
+	/* to get the length of str */
 	while (str[length])
 	{
 		length++;
@@ -33,14 +33,14 @@ char *_strdup(char *str)
 
 	/**
 	 *  we use length instate of c[i] != '\0'
-	 *because there is no array of c are yet init
+	 * because there is no array of c are yet init
 	*/
 	for (i = 0; i < length; i++)
 	{
-		c[i] = str[i]; /* to copy and double the string into c*/
+		c[i] = str[i]; /* to copy and double the string into c */
 	}
 
-	c[i] = '\0'; /* the last elemnt str[length] = NULL*/
+	c[i] = '\0'; /* the last elemnt str[length] = NULL */
 
 	return (c);
 }
