@@ -11,11 +11,6 @@ void free_grid(int **grid, int height)
 {
 	int x;
 
-	if (grid == NULL || height <= 0)
-	{
-		return (NULL);
-	}
-
 	for (x = 0; x < height; x++)
 	{
 		free(grid[x]);
