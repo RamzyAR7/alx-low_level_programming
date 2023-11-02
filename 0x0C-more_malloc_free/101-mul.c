@@ -1,68 +1,87 @@
-#include <stdlib.h>
+#include "main.h"
 #include <stdio.h>
-/**
- * _isdigit - tells if the string consists of digits
- * @n: pointer to current item in argument
- * Return: return 0 if all digits, 1 if not all digits.
- */
-int _isdigit(char *n)
-{
-	int i;
+#include <stdlib.h>
 
-	i = 0;
-	while (n[i])
+/**
+ * _print - prints a string followed by a new newline
+ * @s: str to print
+ */
+
+void _print(char *s)
+{
+	int a = 0;
+
+	while (s[a])
 	{
-		if (n[i] >= '0' && n[i] <= '9')
-			i++;
-		else
-			return (1);
+		_putchar(s[a]);
+		a++;
 	}
-	return (0);
 }
-/**
- * _atoi - converts a string of ascii digits to the values they represent
- * @c: pointer to the source string
- * Return: value of digits
- */
-int _atoi(char *c)
-{
-	int i, result;
 
-	i = result = 0;
-	while (c[i])
+/**
+ * _atoi - converts a string to an int
+ * @c: pointer to string
+ * Return: converted int
+ */
+
+int _atoi(const char *c)
+{
+	int s = 1;
+	unsigned long int re = 0, f, a;
+
+	for (f = 0; !(c[f] >= 48 && c[f] <= 57); f++)
+		if (c[f] == '-')
+			s *= -1;
+
+	for (a = f; c[a] >= 48 && c[a] <= 57; a++)
 	{
-		if (c[i] >= '0' && c[i] <= '9')
-		{
-			result *= 10;
-			result += (c[i] - '0');
-		}
-		i++;
+		re *= 10;
+		re += (c[a] - 48);
 	}
-	return (result);
-}
-/**
- * main - main function call
- * @argc: argument count
- * @argv: 2D array of arguments
- * Return: return 0 on success, 98 on failure
- */
-int main(int argc, char *argv[])
-{
-	int i;
 
-	malloc();
-	if (argc != 3)
+	return (s * re);
+}
+
+/**
+ * print_int - prints an integer
+ * @n: int
+ * Return: void
+ */
+
+void print_int(unsigned long int n)
+{
+	unsigned long int divi = 1;
+	unsigned long int a, re;
+
+	for (a = 0; n / divi > 9; a++, divi *= 10)
+		;
+
+	for (; divi >= 1; n %= divi, divi /= 10)
 	{
-		printf("Error\n");
+		re = n / divi;
+		_putchar('0' + re);
+	}
+}
+
+/**
+ * main - returns the product of two positive numbers
+ * @argc: number of arguments
+ * @argv: arguments
+ * Return: 0
+ */
+
+int main(int argc, char const *argv[])
+{
+	(void)argc;
+
+	if (argc != 3 || !_atoi(argv[1]) || !_atoi(argv[2]))
+	{
+		_print("Error\n");
 		exit(98);
 	}
-	for (i = 1; i < argc; i++)
-	{
-		if (_isdigit(argv[i]))
-		{
-			printf("Error\n");
-			exit(98);
-		}
-	}
+
+	print_int(_atoi(argv[1]) * _atoi(argv[2]));
+	_putchar('\n');
+
 	return (0);
 }

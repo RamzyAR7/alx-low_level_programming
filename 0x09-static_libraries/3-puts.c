@@ -5,7 +5,7 @@
  * @str: pointer of char
  * by ramzy
 */
-void _puts(char *str)
+void _print(char *str)
 {
 	while (*str)
 	{
