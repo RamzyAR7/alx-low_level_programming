@@ -3,43 +3,43 @@
 #include <stdlib.h>
 
 /**
- * _print - prints a string followed by a new newline
- * @s: str to print
+ * _puts - prints a string followed by a new newline
+ * @str: str to print
  */
 
-void _print(char *s)
+void _puts(char *str)
 {
 	int a = 0;
 
-	while (s[a])
+	while (str[a])
 	{
-		_putchar(s[a]);
+		_putchar(str[a]);
 		a++;
 	}
 }
 
 /**
  * _atoi - converts a string to an int
- * @c: pointer to string
+ * @s: pointer to string
  * Return: converted int
  */
 
-int _atoi(const char *c)
+int _atoi(const char *s)
 {
-	int s = 1;
-	unsigned long int re = 0, f, a;
+	int sign = 1;
+	unsigned long int resp = 0, first, a;
 
-	for (f = 0; !(c[f] >= 48 && c[f] <= 57); f++)
-		if (c[f] == '-')
-			s *= -1;
+	for (first = 0; !(s[first] >= 48 && s[first] <= 57); first++)
+		if (s[first] == '-')
+			sign *= -1;
 
-	for (a = f; c[a] >= 48 && c[a] <= 57; a++)
+	for (a = first; s[a] >= 48 && s[a] <= 57; a++)
 	{
-		re *= 10;
-		re += (c[a] - 48);
+		resp *= 10;
+		resp += (s[a] - 48);
 	}
 
-	return (s * re);
+	return (sign * resp);
 }
 
 /**
@@ -50,16 +50,16 @@ int _atoi(const char *c)
 
 void print_int(unsigned long int n)
 {
-	unsigned long int divi = 1;
-	unsigned long int a, re;
+	unsigned long int divisor = 1;
+	unsigned long int a, resp;
 
-	for (a = 0; n / divi > 9; a++, divi *= 10)
+	for (a = 0; n / divisor > 9; a++, divisor *= 10)
 		;
 
-	for (; divi >= 1; n %= divi, divi /= 10)
+	for (; divisor >= 1; n %= divisor, divisor /= 10)
 	{
-		re = n / divi;
-		_putchar('0' + re);
+		resp = n / divisor;
+		_putchar('0' + resp);
 	}
 }
 
@@ -76,7 +76,7 @@ int main(int argc, char const *argv[])
 
 	if (argc != 3 || !_atoi(argv[1]) || !_atoi(argv[2]))
 	{
-		_print("Error\n");
+		_puts("Error\n");
 		exit(98);
 	}
 
