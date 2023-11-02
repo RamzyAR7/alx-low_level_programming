@@ -66,14 +66,12 @@ int main(int args_count, char *args[])
 	num1_len = get_length(num1);
 	num2_len = get_length(num2);
 	total_len = num1_len + num2_len + 1;
-
 	product = malloc(sizeof(int) * total_len);
 	if (!product)
 		return (1);
 
 	for (idx = 0; idx <= num1_len + num2_len; idx++)
 		product[idx] = 0;
-
 	for (num1_len = num1_len - 1; num1_len >= 0; num1_len--)
 	{
 		val1 = num1[num1_len] - '0';
@@ -90,7 +88,6 @@ int main(int args_count, char *args[])
 		if (overflow)
 			product[num1_len + num2_len + 1] += overflow;
 	}
-
 	for (idx = 0; idx < total_len - 1; idx++)
 	{
 		if (product[idx])
@@ -102,7 +99,6 @@ int main(int args_count, char *args[])
 
 	if (!started)
 		_putchar('0');
-
 	_putchar('\n');
 	free(product);
 	return (0);
