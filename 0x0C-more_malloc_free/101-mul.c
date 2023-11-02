@@ -1,87 +1,77 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+int is_number(char *str);
+void print_error_and_exit(void);
+long int multiply(char *num1, char *num2);
 
 /**
- * _puts - prints a string followed by a new newline
- * @str: str to print
+ * main - Entry point, multiplies two numbers
+ * @argc: Argument count
+ * @argv: Argument vector
+ *
+ * Return: 0 on success, 98 on failure
  */
-
-void _puts(char *str)
+int main(int argc, char *argv[])
 {
-	int a = 0;
+	long int result;
 
-	while (str[a])
+	if (argc != 3)
 	{
-		_putchar(str[a]);
-		a++;
-	}
-}
-
-/**
- * _atoi - converts a string to an int
- * @s: pointer to string
- * Return: converted int
- */
-
-int _atoi(const char *s)
-{
-	int sign = 1;
-	unsigned long int resp = 0, first, a;
-
-	for (first = 0; !(s[first] >= 48 && s[first] <= 57); first++)
-		if (s[first] == '-')
-			sign *= -1;
-
-	for (a = first; s[a] >= 48 && s[a] <= 57; a++)
-	{
-		resp *= 10;
-		resp += (s[a] - 48);
+		print_error_and_exit();
 	}
 
-	return (sign * resp);
-}
-
-/**
- * print_int - prints an integer
- * @n: int
- * Return: void
- */
-
-void print_int(unsigned long int n)
-{
-	unsigned long int divisor = 1;
-	unsigned long int a, resp;
-
-	for (a = 0; n / divisor > 9; a++, divisor *= 10)
-		;
-
-	for (; divisor >= 1; n %= divisor, divisor /= 10)
+	if (!is_number(argv[1]) || !is_number(argv[2]))
 	{
-		resp = n / divisor;
-		_putchar('0' + resp);
-	}
-}
-
-/**
- * main - returns the product of two positive numbers
- * @argc: number of arguments
- * @argv: arguments
- * Return: 0
- */
-
-int main(int argc, char const *argv[])
-{
-	(void)argc;
-
-	if (argc != 3 || !_atoi(argv[1]) || !_atoi(argv[2]))
-	{
-		_puts("Error\n");
-		exit(98);
+		print_error_and_exit();
 	}
 
-	print_int(_atoi(argv[1]) * _atoi(argv[2]));
-	_putchar('\n');
+	result = multiply(argv[1], argv[2]);
+	printf("%ld\n", result);
 
 	return (0);
+}
+
+/**
+ * is_number - Checks if a string is a number
+ * @str: The string to be checked
+ *
+ * Return: 1 if string is a number, 0 otherwise
+ */
+int is_number(char *str)
+{
+	int i = 0;
+
+	if (str[0] == '\0')
+		return (0);
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (!isdigit(str[i]))
+			return (0);
+	}
+
+	return (1);
+}
+
+/**
+ * print_error_and_exit - Prints an error and exits
+ */
+void print_error_and_exit(void)
+{
+	printf("Error\n");
+	exit(98);
+}
+
+/**
+ * multiply - Multiplies two numbers given as strings
+ * @num1: The first number as a string
+ * @num2: The second number as a string
+ *
+ * Return: The result of the multiplication
+ */
+long int multiply(char *num1, char *num2)
+{
+	return (atol(num1) * atol(num2));
 }
