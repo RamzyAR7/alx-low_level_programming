@@ -1,87 +1,105 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "main.h"
 
 /**
- * _puts - prints a string followed by a new newline
- * @str: str to print
+ * contains_only_digits - determines if the string has only digit characters
+ * @str: string to examine
+ *
+ * Return: 1 if only digits, 0 otherwise
  */
-
-void _puts(char *str)
+int contains_only_digits(char *str)
 {
-	int a = 0;
+	int idx = 0;
 
-	while (str[a])
+	while (str[idx])
 	{
-		_putchar(str[a]);
-		a++;
+		if (str[idx] < '0' || str[idx] > '9')
+			return (0);
+		idx++;
 	}
+	return (1);
 }
 
 /**
- * _atoi - converts a string to an int
- * @s: pointer to string
- * Return: converted int
+ * get_length - computes the length of a string
+ * @str: string to measure
+ *
+ * Return: length of the string
  */
-
-int _atoi(const char *s)
+int get_length(char *str)
 {
-	int sign = 1;
-	unsigned long int resp = 0, first, a;
+	int len = 0;
 
-	for (first = 0; !(s[first] >= 48 && s[first] <= 57); first++)
-		if (s[first] == '-')
-			sign *= -1;
-
-	for (a = first; s[a] >= 48 && s[a] <= 57; a++)
+	while (str[len])
 	{
-		resp *= 10;
-		resp += (s[a] - 48);
+		len++;
 	}
-
-	return (sign * resp);
+	return (len);
 }
 
 /**
- * print_int - prints an integer
- * @n: int
- * Return: void
+ * display_error - shows error message and exits program
  */
-
-void print_int(unsigned long int n)
+void display_error(void)
 {
-	unsigned long int divisor = 1;
-	unsigned long int a, resp;
-
-	for (a = 0; n / divisor > 9; a++, divisor *= 10)
-		;
-
-	for (; divisor >= 1; n %= divisor, divisor /= 10)
-	{
-		resp = n / divisor;
-		_putchar('0' + resp);
-	}
+	printf("Error\n");
+	exit(98);
 }
 
 /**
- * main - returns the product of two positive numbers
- * @argc: number of arguments
- * @argv: arguments
- * Return: 0
+ * main - multiplies two positive numbers
+ * @args_count: argument count
+ * @args: argument array
+ *
+ * Return: 0 on success
  */
-
-int main(int argc, char const *argv[])
+int main(int args_count, char *args[])
 {
-	(void)argc;
+	char *num1, *num2;
+	int num1_len, num2_len, total_len, idx, overflow, val1, val2, *product, started = 0;
 
-	if (argc != 3 || !_atoi(argv[1]) || !_atoi(argv[2]))
+	num1 = args[1], num2 = args[2];
+	if (args_count != 3 || !contains_only_digits(num1) || !contains_only_digits(num2))
+		display_error();
+
+	num1_len = get_length(num1);
+	num2_len = get_length(num2);
+	total_len = num1_len + num2_len + 1;
+	product = malloc(sizeof(int) * total_len);
+	if (!product)
+		return (1);
+
+	for (idx = 0; idx <= num1_len + num2_len; idx++)
+		product[idx] = 0;
+	for (num1_len = num1_len - 1; num1_len >= 0; num1_len--)
 	{
-		_puts("Error\n");
-		exit(98);
+		val1 = num1[num1_len] - '0';
+		overflow = 0;
+
+		for (num2_len = get_length(num2) - 1; num2_len >= 0; num2_len--)
+		{
+			val2 = num2[num2_len] - '0';
+			overflow += product[num1_len + num2_len + 1] + (val1 * val2);
+			product[num1_len + num2_len + 1] = overflow % 10;
+			overflow /= 10;
+		}
+
+		if (overflow)
+			product[num1_len + num2_len + 1] += overflow;
+	}
+	for (idx = 0; idx < total_len - 1; idx++)
+	{
+		if (product[idx])
+			started = 1;
+
+		if (started)
+			_putchar(product[idx] + '0');
 	}
 
-	print_int(_atoi(argv[1]) * _atoi(argv[2]));
+	if (!started)
+		_putchar('0');
 	_putchar('\n');
-
+	free(product);
 	return (0);
 }
