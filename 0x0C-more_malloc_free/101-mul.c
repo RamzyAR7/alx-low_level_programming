@@ -1,129 +1,161 @@
+#include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * _isdigit - Write a function that checks for a digit (0 through 9).
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c);
-
-/**
- * _strlen - returns the length of a string
- * @str: string to evaluate
+ * @n: number.
  *
- * Return: the length of the string
+ * Return: 1 if c is lowercase or Returns 0 otherwise
  */
-int _strlen(char *str)
+
+int _isdigit(char *n)
 {
-	int len = 0;
 
-	while (str[len])
-		len++;
-	return (len);
-}
-
-/**
- * _isdigit - checks for a digit (0 through 9)
- * @c: char to be checked
- *
- * Return: 1 if c is a digit, 0 otherwise
- */
-int _isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-/**
- * print_error - prints error message and exits with status 98
- */
-void print_error(void)
-{
-	char error_msg[] = "Error\n";
-	int i;
-
-	for (i = 0; error_msg[i] != '\0'; i++)
-		_putchar(error_msg[i]);
-	exit(98);
-}
-
-/**
- * multiply - multiplies two numbers and prints the result
- * @num1: the first number as a string
- * @num2: the second number as a string
- */
-void multiply(char *num1, char *num2)
-{
-	int len1 = _strlen(num1), len2 = _strlen(num2);
-	int i, j, k, carry, n1, n2, sum, idx1, idx2;
-	char *result;
-
-	if (len1 == 0 || len2 == 0)
-		print_error();
-
-	result = malloc(len1 + len2);
-	if (!result)
-		print_error();
-
-	for (i = 0; i < len1 + len2; i++)
-		result[i] = 0;
-
-	for (i = len1 - 1; i >= 0; i--)
+	while (*n)
 	{
-		carry = 0;
-		n1 = num1[i] - '0';
-		idx2 = 0;
-
-		for (j = len2 - 1; j >= 0; j--)
+		if (*n < '0' || *n > '9')
 		{
-			n2 = num2[j] - '0';
-			sum = n1 * n2 + result[idx1 + idx2] + carry;
-			carry = sum / 10;
-			result[idx1 + idx2] = sum % 10;
-			idx2++;
-		}
 
-		if (carry > 0)
-			result[idx1 + idx2] += carry;
-		idx1++;
+			return (0);
+		}
+		n++;
 	}
 
-	k = len1 + len2 - 1;
-	while (k >= 0 && result[k] == 0)
-		k--;
+	return (1);
+}
 
-	if (k == -1)
-		_putchar('0');
+/**
+ * mul_two_numbers - Write a program that multiplies two positive numbers.
+ * Return: Always 0 (Success)
+ * @f_n: the first number to multiply
+ * @s_n: the second number to multiply
+ */
 
-	for (; k >= 0; k--)
-		_putchar(result[k] + '0');
+void mul_two_numbers(char *f_n, char *s_n)
+{
+	int f_l = _strlen_recursion(f_n);
+	int s_l = _strlen_recursion(s_n);
 
-	_putchar('\n');
+	int totalLength = f_l + s_l;
+
+	int *result = _calloc(totalLength, sizeof(int));
+
+	int i_1, i_2, i_3, multi, result_Mult;
+
+	if (!result)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+
+	for (i_1 = f_l - 1; i_1 >= 0; i_1--)
+	{
+
+		for (i_2 = s_l - 1; i_2 >= 0; i_2--)
+		{
+
+			multi = (f_n[i_1] - '0') *
+					(s_n[i_2] - '0');
+
+			result_Mult = result[i_1 + i_2 + 1] + multi;
+
+			result[i_1 + i_2] += result_Mult / 10;
+			result[i_1 + i_2 + 1] = result_Mult % 10;
+		}
+	}
+	i_3 = 0;
+
+	while (i_3 < totalLength - 1 && result[i_3] == 0)
+		i_3++;
+	for (; i_3 < totalLength; i_3++)
+		printf("%d", result[i_3]);
+	printf("\n");
 	free(result);
 }
 
 /**
- * main - Entry point, program to multiply two large numbers
- * @argc: Argument count
- * @argv: Argument vector
- *
- * Return: 0 on success, exits with 98 on error
+ * _strlen_rec - Write a function that
+ * returns the length of a string.
+ * Return: Always 0 (Success)
+ * @s: The string to be printed
  */
-int main(int argc, char **argv)
+
+int _strlen_rec(char *s)
 {
-	int i;
+	int length = 0;
 
-	if (argc != 3)
-		print_error();
+	if (*s)
+	{
 
-	for (i = 0; argv[1][i]; i++)
-		if (!_isdigit(argv[1][i]))
-			print_error();
+		length = 1 + _strlen_recursion(s + 1);
 
-	for (i = 0; argv[2][i]; i++)
-		if (!_isdigit(argv[2][i]))
-			print_error();
+		return (length);
+	}
 
-	multiply(argv[1], argv[2]);
+	return (length);
+}
+
+/**
+ * _calloc - Write a function that allocates
+ * memory for an array, using malloc.
+ * Return: Always 0 (Success)
+ * @number: the number of elements you want to allocate memory for
+ * @SizeOfElement: the size of each element in bytes
+ * --------------------------
+ * By Youssef Hassane
+ */
+
+void *_calloc(unsigned int number,
+			  unsigned int SizeOfElement)
+{
+
+	unsigned int t_size;
+
+	void *AllocatedMem;
+
+	unsigned int index = 0;
+
+	char *p;
+
+	if (number == 0 || SizeOfElement == 0)
+	{
+		return (NULL);
+	}
+
+	t_size = number * SizeOfElement;
+
+	AllocatedMem = malloc(t_size);
+
+	if (AllocatedMem != NULL)
+	{
+
+		p = (char *)AllocatedMem;
+		for (; index < t_size; index++)
+		{
+			p[index] = 0;
+		}
+	}
+	return (AllocatedMem);
+}
+
+/**
+ * main - Write a program that multiplies two numbers
+ * Return: Always 0 (Success)
+ * @Count: Number of command-line arguments
+ * @Vector: Array of command-line arguments
+ */
+int main(int Count, char *Vector[])
+{
+
+	if (Count != 3 || !_isdigit(Vector[1]) || !_isdigit(Vector[2]))
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	multiply_two_numbers(Vector[1], Vector[2]);
+
 	return (0);
 }
