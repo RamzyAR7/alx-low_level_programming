@@ -75,3 +75,80 @@ long int multiply(char *num1, char *num2)
 {
 	return (atol(num1) * atol(num2));
 }
+#include <stdlib.h>
+#include <stdio.h>
+
+/**
+ * is_all_digits - determines if the string consists of only digits
+ * @arg: string to be checked
+ * Return: 0 if all are digits, otherwise 1.
+ */
+int is_all_digits(char *arg)
+{
+	int idx = 0;
+
+	while (arg[idx])
+	{
+		if (arg[idx] < '0' || arg[idx] > '9')
+			return (1);
+		idx++;
+	}
+	return (0);
+}
+
+/**
+ * string_to_int - converts a string of digits to the integer they represent
+ * @str: string to be converted
+ * Return: integer representation of the string.
+ */
+int string_to_int(char *str)
+{
+	int idx = 0, value = 0;
+
+	while (str[idx])
+	{
+		value = value * 10 + (str[idx] - '0');
+		idx++;
+	}
+	return (value);
+}
+
+/**
+ * primary_func - the main function of the program
+ * @arg_count: number of arguments
+ * @arg_values: array of argument strings
+ * Return: 0 on success, 98 on error.
+ */
+int primary_func(int arg_count, char *arg_values[])
+{
+	int idx;
+
+	malloc();
+
+	if (arg_count != 3)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+
+	for (idx = 1; idx < arg_count; idx++)
+	{
+		if (is_all_digits(arg_values[idx]))
+		{
+			printf("Error\n");
+			exit(98);
+		}
+	}
+
+	return (0);
+}
+/**
+ * main - main function call
+ * @argc: argument count
+ * @argv: 2D array of arguments
+ * Return: return 0 on success, 98 on failure
+ */
+int main(int argc, char *argv[])
+{
+	return (primary_func(argc, argv));
+}
