@@ -4,46 +4,32 @@
 #include <string.h>
 
 /**
- * _isdigit - Write a function that checks for a digit (0 through 9).
+ * check_for_digit - Checks if a string consists only of digits
+ * @number: The string to check
  *
- * @n: number.
- *
- * Return: 1 if c is lowercase or Returns 0 otherwise
+ * Return: 1 if only digits, 0 otherwise
  */
-
-int _isdigit(char *n)
+int check_for_digit(char *number)
 {
-
-	while (*n)
+	while (*number)
 	{
-		if (*n < '0' || *n > '9')
-		{
-
+		if (*number < '0' || *number > '9')
 			return (0);
-		}
-		n++;
+		number++;
 	}
-
 	return (1);
 }
 
 /**
- * mul_two_numbers - Write a program that multiplies two positive numbers.
- * Return: Always 0 (Success)
- * @f_n: the first number to multiply
- * @s_n: the second number to multiply
+ * multiply - Multiplies two numbers represented as strings
+ * @num1: The first number string
+ * @num2: The second number string
  */
-
-void mul_two_numbers(char *f_n, char *s_n)
+void multiply(char *num1, char *num2)
 {
-	int f_l = _strlen_recursion(f_n);
-	int s_l = _strlen_recursion(s_n);
-
-	int totalLength = f_l + s_l;
-
-	int *result = _calloc(totalLength, sizeof(int));
-
-	int i_1, i_2, i_3, multi, result_Mult;
+	int length1 = string_length(num1), length2 = string_length(num2);
+	int totalLength = length1 + length2, i, j, k, product, carry;
+	int *result = allocate_and_initialize(totalLength, sizeof(int));
 
 	if (!result)
 	{
@@ -51,111 +37,80 @@ void mul_two_numbers(char *f_n, char *s_n)
 		exit(98);
 	}
 
-	for (i_1 = f_l - 1; i_1 >= 0; i_1--)
+	for (i = length1 - 1; i >= 0; i--)
 	{
-
-		for (i_2 = s_l - 1; i_2 >= 0; i_2--)
+		for (j = length2 - 1; j >= 0; j--)
 		{
-
-			multi = (f_n[i_1] - '0') *
-					(s_n[i_2] - '0');
-
-			result_Mult = result[i_1 + i_2 + 1] + multi;
-
-			result[i_1 + i_2] += result_Mult / 10;
-			result[i_1 + i_2 + 1] = result_Mult % 10;
+			product = (num1[i] - '0') * (num2[j] - '0');
+			carry = result[i + j + 1] + product;
+			result[i + j] += carry / 10;
+			result[i + j + 1] = carry % 10;
 		}
 	}
-	i_3 = 0;
 
-	while (i_3 < totalLength - 1 && result[i_3] == 0)
-		i_3++;
-	for (; i_3 < totalLength; i_3++)
-		printf("%d", result[i_3]);
+	k = 0;
+	while (k < totalLength - 1 && result[k] == 0)
+		k++;
+	for (; k < totalLength; k++)
+		printf("%d", result[k]);
 	printf("\n");
 	free(result);
 }
 
 /**
- * _strlen_rec - Write a function that
- * returns the length of a string.
- * Return: Always 0 (Success)
- * @s: The string to be printed
+ * string_length - Calculates the length of a string recursively
+ * @s: The string to calculate the length
+ *
+ * Return: The length of the string
  */
-
-int _strlen_rec(char *s)
+int string_length(char *s)
 {
-	int length = 0;
-
 	if (*s)
-	{
-
-		length = 1 + _strlen_recursion(s + 1);
-
-		return (length);
-	}
-
-	return (length);
+		return (1 + string_length(s + 1));
+	return (0);
 }
 
 /**
- * _calloc - Write a function that allocates
- * memory for an array, using malloc.
- * Return: Always 0 (Success)
- * @number: the number of elements you want to allocate memory for
- * @SizeOfElement: the size of each element in bytes
- * --------------------------
- * By Youssef Hassane
+ * allocate_and_initialize - Allocates and zeros memory
+ * @count: Number of elements
+ * @size: Size of each element
+ *
+ * Return: Pointer to allocated memory
  */
-
-void *_calloc(unsigned int number,
-			  unsigned int SizeOfElement)
+void *allocate_and_initialize(unsigned int count, unsigned int size)
 {
+	unsigned int total_size = count * size, index;
+	void *allocated_memory;
+	char *pointer;
 
-	unsigned int t_size;
-
-	void *AllocatedMem;
-
-	unsigned int index = 0;
-
-	char *p;
-
-	if (number == 0 || SizeOfElement == 0)
-	{
+	if (count == 0 || size == 0)
 		return (NULL);
-	}
 
-	t_size = number * SizeOfElement;
+	allocated_memory = malloc(total_size);
 
-	AllocatedMem = malloc(t_size);
-
-	if (AllocatedMem != NULL)
+	if (allocated_memory != NULL)
 	{
-
-		p = (char *)AllocatedMem;
-		for (; index < t_size; index++)
-		{
-			p[index] = 0;
-		}
+		pointer = (char *)allocated_memory;
+		for (index = 0; index < total_size; index++)
+			pointer[index] = 0;
 	}
-	return (AllocatedMem);
+	return (allocated_memory);
 }
 
 /**
- * main - Write a program that multiplies two numbers
- * Return: Always 0 (Success)
- * @Count: Number of command-line arguments
- * @Vector: Array of command-line arguments
+ * main - Entry point, multiplies two numbers passed as arguments
+ * @argc: Argument count
+ * @argv: Argument vector
+ *
+ * Return: 0 on success, 98 on error
  */
-int main(int Count, char *Vector[])
+int main(int argc, char *argv[])
 {
-
-	if (Count != 3 || !_isdigit(Vector[1]) || !_isdigit(Vector[2]))
+	if (argc != 3 || !check_for_digit(argv[1]) || !check_for_digit(argv[2]))
 	{
 		printf("Error\n");
 		exit(98);
 	}
-	multiply_two_numbers(Vector[1], Vector[2]);
-
+	multiply(argv[1], argv[2]);
 	return (0);
 }
