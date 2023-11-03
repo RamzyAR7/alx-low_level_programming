@@ -59,13 +59,11 @@ int main(int args_count, char *args[])
 	char *num1, *num2;
 	int num1_len, num2_len, total_len, idx,
 		overflow, val1, val2, *product, started = 0;
-
 	num1 = args[1], num2 = args[2];
-	if (args_count != 3 || !contains_only_digits(num1) || !contains_only_digits(num2))
+	if (args_count != 3 || !contains_only_digits(num1)
+	|| !contains_only_digits(num2))
 		display_error();
-
-	num1_len = get_length(num1);
-	num2_len = get_length(num2);
+	num1_len = get_length(num1), num2_len = get_length(num2);
 	total_len = num1_len + num2_len + 1;
 	product = malloc(sizeof(int) * total_len);
 	if (!product)
@@ -74,9 +72,7 @@ int main(int args_count, char *args[])
 		product[idx] = 0;
 	for (num1_len = num1_len - 1; num1_len >= 0; num1_len--)
 	{
-		val1 = num1[num1_len] - '0';
-		overflow = 0;
-
+		val1 = num1[num1_len] - '0', overflow = 0;
 		for (num2_len = get_length(num2) - 1;
 			 num2_len >= 0; num2_len--)
 		{
@@ -92,11 +88,9 @@ int main(int args_count, char *args[])
 	{
 		if (product[idx])
 			started = 1;
-
 		if (started)
 			_putchar(product[idx] + '0');
 	}
-
 	if (!started)
 		_putchar('0');
 	_putchar('\n');
