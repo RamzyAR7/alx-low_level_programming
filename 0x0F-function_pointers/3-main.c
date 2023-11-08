@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 
-	func = get_op_func(operator);
+	func = get_op_func(operator)
 
 	if (func == NULL || operator[1] != '\0')
 	{
