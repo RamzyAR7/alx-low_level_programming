@@ -27,17 +27,13 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 
-	int (*func)(int, int) = get_op_func(operator);
-
-	if (!func || operator[1] != '\0')
+	if (get_op_func(operator) == NULL || operator[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	int calc = func(n1, n2);
-
-	printf("%d\n", calc);
+	printf("%d\n", get_op_func(operator) (n1, n2));
 
 	return (0);
 }
