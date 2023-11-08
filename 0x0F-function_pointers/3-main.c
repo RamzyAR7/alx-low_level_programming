@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 	char *operator;
 	int n1;
 	int n2;
+	int (*func)(int, int);
 
 	if (argc != 4)
 	{
@@ -26,14 +27,15 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(100);
 	}
+	func = get_op_func(operator);
 
-	if (get_op_func(operator) == NULL || operator[1] != '\0')
+	if (func == NULL || operator[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	printf("%d\n", get_op_func(operator) (n1, n2));
+	printf("%d\n", func(n1, n2));
 
 	return (0);
 }
