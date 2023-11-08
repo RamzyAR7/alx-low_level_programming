@@ -1,6 +1,4 @@
 #include "3-calc.h"
-#include <stdio.h>
-#include <stdlib.h>
 /**
  * main - entry point
  * @argc: the number of command
@@ -9,16 +7,19 @@
  */
 int main(int argc, char *argv[])
 {
+	char *operator;
+	int n1;
+	int n2;
+
 	if (argc != 4)
 	{
 		printf("Error\n");
 		exit(98);
 	}
 
-	int n1 = atoi(argv[1]);
-	int n2 = atoi(argv[3]);
-
-	char *operator = argv[2];
+	n1 = atoi(argv[1]);
+	n2 = atoi(argv[3]);
+	operator = argv[2];
 
 	if ((*operator == '/' || *operator == '%') && n2 == 0)
 	{
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
 
 	int (*func)(int, int) = get_op_func(operator);
 
-	if (!func)
+	if (!func || operator[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
