@@ -20,7 +20,7 @@ void print_all(const char * const format, ...)
 		switch (format[i])
 		{
 		case 'c':
-			printf("%c", va_arg(argu, int));
+			printf("%c", va_arg(argu, char));
 			break;
 		case 'i':
 			printf("%d", va_arg(argu, int));
@@ -41,12 +41,15 @@ void print_all(const char * const format, ...)
 			i++;
 			continue;
 		}
-		if (format[i + 1] != '\0')
+		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
+		format[i] == 's') && format[(i + 1)] != '\0')
 		{
 			printf(", ");
 		}
+
 		i++;
 	}
+
 	printf("\n");
 	va_end(argu);
 
