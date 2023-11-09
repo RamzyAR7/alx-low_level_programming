@@ -13,11 +13,10 @@ int sum_them_all(const unsigned int n, ...)
 	}
 
 	va_list argu;
-
-	va_start(argu, n);
-
 	unsigned int i;
 	int result = 0;
+
+	va_start(argu, n);
 
 	for (i = 0; i < n; i++)
 	{
