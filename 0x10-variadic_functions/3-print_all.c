@@ -6,9 +6,9 @@
  * @format: list of types of arguments passed to the function
  * Return: void
  */
-void print_all(const char * const format, ...)
+void print_all(const char *const format, ...)
 {
-	
+
 	va_list argu;
 	unsigned int i = 0;
 	char *str;
@@ -20,7 +20,7 @@ void print_all(const char * const format, ...)
 		switch (format[i])
 		{
 		case 'c':
-			printf("%c", va_arg(argu, char));
+			printf("%c", va_arg(argu, int));
 			break;
 		case 'i':
 			printf("%d", va_arg(argu, int));
@@ -42,7 +42,8 @@ void print_all(const char * const format, ...)
 			continue;
 		}
 		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
-		format[i] == 's') && format[(i + 1)] != '\0')
+			 format[i] == 's') &&
+			format[(i + 1)] != '\0')
 		{
 			printf(", ");
 		}
@@ -52,5 +53,4 @@ void print_all(const char * const format, ...)
 
 	printf("\n");
 	va_end(argu);
-
 }
