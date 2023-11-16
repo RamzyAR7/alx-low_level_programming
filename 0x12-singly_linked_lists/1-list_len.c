@@ -10,9 +10,9 @@ size_t list_len(const list_t *h)
 {
 	const list_t *ptrNode;
 
-	ptrNode = h;
-
 	unsigned int counter = 0;
+
+	ptrNode = h;
 
 	while (ptrNode)
 	{
