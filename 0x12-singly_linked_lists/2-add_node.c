@@ -8,8 +8,10 @@
  */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *first;
+
 	unsigned int counter = 0;
+
+	list_t *first;
 
 	first = malloc(sizeof(list_t));
 
