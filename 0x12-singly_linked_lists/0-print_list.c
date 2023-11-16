@@ -1,6 +1,4 @@
 #include "lists.h"
-#include <stdio.h>
-#include <stdlib.h>
 /**
  * print_list - prints all the elements of a list_t list
  * @h: pointer to the list_t list to print
@@ -9,9 +7,9 @@
  */
 size_t print_list(const list_t *h)
 {
-	const list_t *ptrNode;
+	list_t *ptrNode;
 
-	int counter = 0;
+	unsigned counter = 0;
 
 	ptrNode = h;
 
