@@ -7,7 +7,7 @@
  */
 size_t print_list(const list_t *h)
 {
-	list_t *ptrNode;
+	const list_t *ptrNode;
 
 	unsigned int counter = 0;
 
