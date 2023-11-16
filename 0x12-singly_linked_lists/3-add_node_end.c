@@ -9,7 +9,8 @@
  */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	int counter = 0;
+	unsigned int counter = 0;
+
 	list_t *strNode, *end;
 
 	end = malloc(sizeof(list_t));
