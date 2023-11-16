@@ -9,11 +9,9 @@
  */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *strNode, *end;
-
 	unsigned int counter = 0;
 
-	strNode = *head;
+	list_t *strNode, *end;
 
 	end = malloc(sizeof(list_t));
 
@@ -22,23 +20,39 @@ list_t *add_node_end(list_t **head, const char *str)
 		return (NULL);
 	}
 
-	end->str = _strdup(str);
-
-	while (str[counter])
+	if (!str)
 	{
-		counter++;
+		end->str = NULL;
+		end->len = 0;
 	}
-	end->len = counter;
+	else
+	{
+		end->str = _strdup(str);
+		while (str[counter])
+		{
+			counter++;
+		}
+		end->len = counter;
+	}
 	end->next = NULL;
 
-	while (strNode->next)
+	if (!*head)
 	{
-		strNode = strNode->next;
+		*head = end;
+	}
+	else
+	{
+		strNode = *head;
+
+		while (strNode->next)
+		{
+			strNode = strNode->next;
+		}
+
+		strNode->next = end;
 	}
 
-	strNode->next = end;
-
-	return (strNode);
+	return (end);
 }
 /**
  * *_strdup - function returns a pointer to a new string which is
@@ -73,7 +87,7 @@ char *_strdup(char *str)
 	/**
 	 *  we use length instate of c[i] != '\0'
 	 * because there is no array of c are yet init
-	*/
+	 */
 	for (i = 0; i < length; i++)
 	{
 		c[i] = str[i]; /* to copy and double the string into c */
