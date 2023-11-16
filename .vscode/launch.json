@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/ALX-C-Projects/alx-low_level_programming/0x10-variadic_functions",
-      "program": "/home/ALX-C-Projects/alx-low_level_programming/0x10-variadic_functions/build/Debug/outDebug",
+      "cwd": "/home/ALX-C-Projects/alx-low_level_programming/0x12-singly_linked_lists",
+      "program": "/home/ALX-C-Projects/alx-low_level_programming/0x12-singly_linked_lists/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
