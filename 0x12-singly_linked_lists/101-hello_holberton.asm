@@ -1,25 +1,20 @@
-julien@ubuntu:~/0x00$ nasm -f elf64 1-hello_holberton.asm && gcc -no-pie -std=gnu89 1-hello_holberton.o -o hello
-julien@ubuntu:~/0x00$ ./hello
-Hello, Holberton
-julien@ubuntu:~/0x00$
-```
-```
-julien@ubuntu:~/0x00$ cat 1-hello_holberton.asm
 section .data
-		msg:    db      "Hello, Holberton", 10
-		len:    equ     $ - msg
-section .text
-		global _start
+    message db 'Hello, Holberton', 0Ah, 0  ; The message to print followed by newline and null terminator
 
-_start:
-		mov     rax, 1
-		mov     rdi, 1
-		mov     rsi, msg
-		mov     rdx, len
-		syscall
-		mov     rax, 60
-		mov     rdi, 0
-		syscall
-julien@ubuntu:~/0x00$
-```
-```
+section .text
+    global main
+    extern printf
+
+main:
+    ; Set up the stack frame
+    push rbp
+    mov rbp, rsp
+
+    ; Call printf
+    mov rdi, message  ; The first argument (format string) for printf
+    call printf
+
+    ; Clean up the stack frame and return
+    mov rsp, rbp
+    pop rbp
+    ret
