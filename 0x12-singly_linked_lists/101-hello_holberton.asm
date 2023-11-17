@@ -1,5 +1,6 @@
 section .data
-    hello db "Hello, Holberton", 10 
+    hello db "Hello, Holberton", 10  ; 10 is the ASCII code for newline
+    format db "%s", 0
 
 section .text
     global main
