@@ -1,30 +1,30 @@
 section .data
-    greeting db "Hello, Holberton", 10  ; "Hello, Holberton" string with a newline character
+    hello db "Hello, Holberton", 10 
 
 section .text
-    global main  ; Define main as a global symbol
+    global main
 
 main:
-    ; Prepare arguments for the custom printf
-    mov rdi, format  ; Set format string address in rdi
-    mov rsi, greeting  ; Set greeting string address in rsi
+    ; Set up arguments for printf
+    mov rdi, format
+    mov rsi, hello
 
-    ; Invoke the custom printf function
-    mov rax, 0  ; Prepare rax with syscall number for sys_write
-    call printf  ; Call the custom printf function
+    ; Call printf
+    mov rax, 0   ; syscall number for sys_write
+    call printf
 
-    ; Terminate the program
-    mov rax, 60  ; Prepare rax with syscall number for sys_exit
-    xor rdi, rdi  ; Set exit status to 0
-    syscall  ; Perform exit syscall
+    ; Exit the program
+    mov rax, 60  ; syscall number for sys_exit
+    xor rdi, rdi ; status 0
+    syscall
 
 section .text
-    ; Define a custom printf function
-    global printf  ; Declare printf as a global symbol
+    ; Dummy printf function for assembly
+    global printf
     printf:
-        ; Setup for syscall to write to stdout
-        mov rax, 1       ; Syscall number for sys_write
-        mov rdi, 1       ; File descriptor for stdout
-        mov rdx, 17      ; Length of the greeting message
-        syscall          ; Perform the write syscall
-        ret              ; Return from the printf function
+        ; Set up syscall parameters
+        mov rax, 1          ; syscall number for sys_write
+        mov rdi, 1          ; file descriptor 1 (stdout)
+        mov rdx, 17         ; message length
+        syscall
+        ret
