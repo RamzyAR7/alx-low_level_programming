@@ -1,21 +1,31 @@
 section .data
-    message db 'Hello, Holberton', 0Ah, 0  ; The message to print followed by newline and null terminator
+    hello db "Hello, Holberton", 10  ; 10 is the ASCII code for newline
+    format db "%s", 0
 
 section .text
     global main
-    extern printf
+    extern printf  ; You don't need this if you're defining printf below
 
 main:
-    ; Set up the stack frame
-    push rbp
-    mov rbp, rsp
+    ; Set up arguments for printf
+    mov rdi, hello
 
     ; Call printf
-    mov rdi, message  ; The first argument (format string) for printf
     call printf
 
-    ; Clean up the stack frame and return
-    mov rsp, rbp
-    pop rbp
-    ret
-```
+    ; Exit the program
+    mov rax, 60  ; syscall number for sys_exit
+    xor rdi, rdi ; status 0
+    syscall
+
+section .text
+    ; Dummy printf function for assembly
+    global printf
+    printf:
+        ; Set up syscall parameters
+        mov rax, 1          ; syscall number for sys_write
+        mov rdi, 1          ; file descriptor 1 (stdout)
+        mov rsi, [rsp + 8]  ; message pointer from stack
+        mov rdx, 17         ; message length
+        syscall
+        ret
