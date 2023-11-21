@@ -7,8 +7,13 @@
  */
 void free_listint2(listint_t **head)
 {
-	listint_t *buffer;
-	listint_t *b_head;
+	listint_t *buffer, *b_head;
+	
+	if (!*head)
+	{
+		return;
+	}
+	
 	b_head = *head;
 
 	while (b_head->next != NULL)
