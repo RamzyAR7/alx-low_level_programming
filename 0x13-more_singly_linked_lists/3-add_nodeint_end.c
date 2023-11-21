@@ -18,6 +18,7 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 		free(n_node);
 		return (NULL);
 	}
+
 	n_node->n = n;
 	n_node->next = NULL;
 
@@ -25,15 +26,17 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 	{
 		*head = n_node;
 	}
-
-	b_head = *head;
-
-	while (b_head)
+	else
 	{
-		b_head = b_head->next;
+		b_head = *head;
+
+		while (b_head)
+		{
+			b_head = b_head->next;
+		}
+
+		b_head->next = n_node;
 	}
 
-	b_head->next = n_node;
-
-	return (b_head);
+	return (n_node);
 }
