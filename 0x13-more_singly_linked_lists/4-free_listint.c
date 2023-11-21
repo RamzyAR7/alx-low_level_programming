@@ -14,11 +14,6 @@ void free_listint(listint_t *head)
 	{
 		buffer = head->next;
 
-		if (head->n)
-		{
-			free(head->n);
-		}
-
 		free(head);
 
 		head = buffer;
