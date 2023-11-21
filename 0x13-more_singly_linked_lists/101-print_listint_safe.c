@@ -9,35 +9,22 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
+	size_t x;
 	size_t counter = 0;
-	const listint_t *current = head;
-	const listint_t *checker;
+	const listint_t *node_list[1000];
 
-	while (current != NULL)
+	while (head)
 	{
-		printf("[%p] %d\n", (void *)current, current->n);
-		counter++;
-
-		checker = head;
-		while (checker != current)
-		{
-			if (checker == current->next)
+		for (x = 0; x <= counter; x++)
+			if (node_list[x] == head)
 			{
-				printf("-> [%p] %d\n", (void *)current->next, current->next->n);
+				printf("-> [%p] %d\n", (void *)head, head->n);
 				return (counter);
 			}
-			checker = checker->next;
-		}
-
-		if (current->next <= current)
-		{
-			printf("-> [%p] %d\n", (void *)current->next, current->next->n);
-			counter++;
-			break;
-		}
-
-		current = current->next;
+		node_list[counter] = head;
+		printf("[%p] %d\n", (void *)head, head->n);
+		head = head->next;
+		counter++;
 	}
-
 	return (counter);
 }
