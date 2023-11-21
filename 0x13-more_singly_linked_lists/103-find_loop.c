@@ -11,23 +11,23 @@
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *tortoise, *hare;
+	listint_t *check_node, *hare;
 
-	tortoise = hare = head;
+	check_node = hare = head;
 	while (hare != NULL && hare->next != NULL)
 	{
-		tortoise = tortoise->next;
+		check_node = check_node->next;
 		hare = hare->next->next;
 
-		if (tortoise == hare)
+		if (check_node == hare)
 		{
-			tortoise = head;
-			while (tortoise != hare)
+			check_node = head;
+			while (check_node != hare)
 			{
-				tortoise = tortoise->next;
+				check_node = check_node->next;
 				hare = hare->next;
 			}
-			return (tortoise);
+			return (check_node);
 		}
 	}
 	return (NULL);
