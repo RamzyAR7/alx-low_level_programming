@@ -15,8 +15,10 @@ void free_listint2(listint_t **head)
 	{
 		buffer = b_head->next;
 
-		b_head = NULL;
+		free(b_head);
 
 		b_head = buffer;
 	}
+
+	b_head = NULL;
 }
