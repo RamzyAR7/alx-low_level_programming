@@ -5,6 +5,8 @@
 #include <stdio.h>
 
 #define BUFFER_SIZE 1024
+
+void close_fd(int fd);
 /**
  * close_fd - close a file descriptor
  * @fd: file descriptor
