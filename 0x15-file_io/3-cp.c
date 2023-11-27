@@ -5,28 +5,6 @@
 #include <stdio.h>
 
 #define BUFFER_SIZE 1024
-
-char *Make_buffer(char *file);
-void close_fd(int fd);
-
-/**
- * Make_buffer - create a buffer
- * @file: file name
- * Return: a pointer to the buffer
- */
-char *Make_buffer(char *file)
-{
-	char *buffer = malloc(BUFFER_SIZE);
-
-	if (buffer == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
-		exit(99);
-	}
-
-	return (buffer);
-}
-
 /**
  * close_fd - close a file descriptor
  * @fd: file descriptor
