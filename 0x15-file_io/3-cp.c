@@ -1,23 +1,21 @@
 #include "main.h"
-#include <fcntl.h>
-#include <sys/stat.h>
+
 /**
  * main - copies the content of a file to another file
  * @argc: number of arguments
- * @argv: array of arguments
+ * @argv: array of pointers to arguments
  *
  * Return: 0 on success
  *         97 if argc is not 3
- *         98 if file_from cannot be read or file_to cannot be created or
+ *         98 if file_from cannot be read or if file_to cannot be created or
  *            written to
  *         99 if file_from cannot be closed
- *         100 if file_to cannot be closed
+ *         100 if file_to cannot be closed or if close(fd2) fails
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, read_bytes, write_bytes;
+	int fd1, fd2, read_bytes, write_bytes;
 	char *buffer;
-	mode_t file_perm;
 
 	if (argc != 3)
 	{
@@ -26,19 +24,19 @@ int main(int argc, char *argv[])
 	}
 
 	/* open file_from */
-	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
+	fd1 = open(argv[1], O_RDONLY);
+	if (fd1 == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 
 	/* open file_to */
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, file_perm);
-	if (fd_to == -1)
+	fd2 = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fd2 == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		close(fd_from);
+		close(fd1);
 		exit(99);
 	}
 
@@ -46,36 +44,36 @@ int main(int argc, char *argv[])
 	buffer = malloc(sizeof(char) * 1024);
 	if (buffer == NULL)
 	{
-		close(fd_from);
-		close(fd_to);
-		exit(98);
+		close(fd1);
+		close(fd2);
+		exit(99);
 	}
 
 	/* read file_from */
-	read_bytes = read(fd_from, buffer, 1024);
+	read_bytes = read(fd1, buffer, 1024);
 	if (read_bytes == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		free(buffer);
-		close(fd_from);
-		close(fd_to);
+		close(fd1);
+		close(fd2);
 		exit(98);
 	}
 
 	/* write to file_to */
-	write_bytes = write(fd_to, buffer, read_bytes);
+	write_bytes = write(fd2, buffer, read_bytes);
 	if (write_bytes == -1 || write_bytes != read_bytes)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		free(buffer);
-		close(fd_from);
-		close(fd_to);
+		close(fd1);
+		close(fd2);
 		exit(99);
 	}
 
 	free(buffer);
-	close(fd_from);
-	close(fd_to);
+	close(fd1);
+	close(fd2);
 
 	return (0);
 }
