@@ -12,34 +12,42 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
+
 	int fd;
-	ssize_t bytes;
+	ssize_t read_bytes, write_bytes;
+	char *buffer;
 
 	if (filename == NULL)
-	{
 		return (0);
-	}
 
+	/* open file */
 	fd = open(filename, O_RDONLY);
-
 	if (fd == -1)
+		return (0);
+
+	/* allocate buffer */
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
+		return (0);
+
+	/* read file */
+	read_bytes = read(fd, buffer, letters);
+	if (read_bytes == -1)
 	{
+		free(buffer);
 		return (0);
 	}
-	char buffer[1024];
 
-	while (letters > 0 && (bytes = read(fd, buffer, sizeof(buffer))) > 0)
+	/* write to stdout */
+	write_bytes = write(STDOUT_FILENO, buffer, read_bytes);
+	if (write_bytes == -1 || write_bytes != read_bytes)
 	{
-		ssize_t bytes_written = write(STDOUT_FILENO, buffer, bytes);
-
-		if (bytes_written == -1)
-		{
-			close(fd);
-			return (0);
-		}
-
-		letters -= bytes_written;
+		free(buffer);
+		return (0);
 	}
+
+	free(buffer);
 	close(fd);
-	return ((letters == 0) ? letters : 0);
+
+	return (write_bytes);
 }
