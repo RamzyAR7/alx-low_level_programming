@@ -1,83 +1,79 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 
-#define BUF_SIZE 1024
-
-
-void error_and_exit(int code, const char *message, const char *file_name)
-{
-	dprintf(STDERR_FILENO, message, file_name);
-	exit(code);
-}
-
-int open_source_file(const char *file_from)
-{
-	int fd_from = open(file_from, O_RDONLY);
-
-	if (fd_from == -1)
-	{
-		error_and_exit(98, "Error: Can't read from file %s\n", file_from);
-	}
-	return (fd_from);
-}
-
-int open_destination_file(const char *file_to)
-{
-	int fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		error_and_exit(99, "Error: Can't write to file %s\n", file_to);
-	}
-	return (fd_to);
-}
-
-void copy_file_content(int fd_from, int fd_to)
-{
-	char buffer[BUF_SIZE];
-	ssize_t read_size, write_size;
-
-	while ((read_size = read(fd_from, buffer, BUF_SIZE)) > 0)
-	{
-		write_size = write(fd_to, buffer, read_size);
-		if (write_size != read_size)
-		{
-			error_and_exit(99, "Error: Can't write to file %s\n", file_to);
-		}
-	}
-
-	if (read_size == -1)
-	{
-		error_and_exit(98, "Error: Can't read from file\n", NULL);
-	}
-}
-
-void close_file(int fd, const char *file_name)
-{
-	if (close(fd) == -1)
-	{
-		error_and_exit(100, "Error: Can't close fd %d\n", fd);
-	}
-}
-
+/**
+ * main - copies the content of a file to another file
+ * @argc: number of arguments
+ * @argv: array of pointers to arguments
+ *
+ * Return: 0 on success
+ *         97 if argc is not 3
+ *         98 if file_from cannot be read or if file_to cannot be created or
+ *            written to
+ *         99 if file_from cannot be closed
+ *         100 if file_to cannot be closed or if close(fd2) fails
+ */
 int main(int argc, char *argv[])
 {
+	int fd1, fd2, read_bytes, write_bytes;
+	char *buffer;
+
 	if (argc != 3)
 	{
-		error_and_exit(97, "Usage: cp file_from file_to\n", NULL);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
 
-	const char *file_from = argv[1];
-	const char *file_to = argv[2];
+	/* open file_from */
+	fd1 = open(argv[1], O_RDONLY);
+	if (fd1 == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 
-	int fd_from = open_source_file(file_from);
-	int fd_to = open_destination_file(file_to);
+	/* open file_to */
+	fd2 = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fd2 == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		close(fd1);
+		exit(99);
+	}
 
-	copy_file_content(fd_from, fd_to);
+	/* allocate buffer */
+	buffer = malloc(sizeof(char) * 1024);
+	if (buffer == NULL)
+	{
+		close(fd1);
+		close(fd2);
+		exit(99);
+	}
 
-	close_file(fd_from, file_from);
-	close_file(fd_to, file_to);
+	/* read file_from */
+	read_bytes = read(fd1, buffer, 1024);
+	if (read_bytes == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		free(buffer);
+		close(fd1);
+		close(fd2);
+		exit(98);
+	}
 
-	return 0;
+	/* write to file_to */
+	write_bytes = write(fd2, buffer, read_bytes);
+	if (write_bytes == -1 || write_bytes != read_bytes)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		free(buffer);
+		close(fd1);
+		close(fd2);
+		exit(99);
+	}
+
+	free(buffer);
+	close(fd1);
+	close(fd2);
+
+	return (0);
 }
