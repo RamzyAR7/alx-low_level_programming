@@ -8,11 +8,12 @@
 int sum_dlistint(dlistint_t *head)
 {
 	unsigned int total = 0;
+	dlistint_t *access = head;
 
-	while (head)
+	while (access)
 	{
-		head = head->next;
-		total += head->n;
+		access = access->next;
+		total += access->n;
 	}
 
 	return (total);
