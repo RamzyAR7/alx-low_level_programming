@@ -12,8 +12,8 @@ int sum_dlistint(dlistint_t *head)
 
 	while (access)
 	{
-		access = access->next;
 		total += access->n;
+		access = access->next;
 	}
 
 	return (total);
