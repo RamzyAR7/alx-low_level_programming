@@ -12,6 +12,8 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *access_b, *access_a, *new;
 
+	if (h == NULL)
+		return (NULL);
 	access_b = access_a = *h;
 	unsigned int i = 0;
 	unsigned int x = 0;
@@ -21,24 +23,31 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		access_b = access_b->next;
 		i++;
 	}
-	while (access_a && x != idx)
-	{
-		access_a = access_a->next;
-		x++;
-	}
-	new = malloc(sizeof(dlistint_t));
-
-	if (new == NULL)
+	if (idx != 0 && access_b == NULL)
 		return (NULL);
 
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+		return (NULL);
 	new->n = n;
 	new->next = NULL;
 	new->prev = NULL;
 
-	access_b->next = new;
-	new->prev = access_b;
-	access_a->prev = new;
-	new->next = access_a;
-
+	if (idx == 0)
+	{
+		new->next = *h;
+		if (*h)
+			(*h)->prev = new;
+		*h = new;
+	}
+	else
+	{
+		access_a = access_b->next;
+		access_b->next = new;
+		new->prev = access_b;
+		new->next = access_a;
+		if (access_a)
+			access_a->prev = new;
+	}
 	return (*h);
 }
