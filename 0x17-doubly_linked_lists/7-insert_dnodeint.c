@@ -10,11 +10,12 @@
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *access_b, *access_a, *new;
+	unsigned int i = 0;
+
+	access_b = access_a = *h;
 
 	if (h == NULL)
 		return (NULL);
-	access_b = access_a = *h;
-	unsigned int i = 0;
 
 	while (access_b && i != idx - 1)
 	{
