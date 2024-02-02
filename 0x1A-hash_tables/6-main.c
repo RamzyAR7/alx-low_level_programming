@@ -1,5 +1,10 @@
 #include "hash_tables.h"
 
+/**
+ * main - Entry point
+ *
+ * Return: EXIT_SUCCESS if successful, otherwise exit with an error code.
+ */
 int main(void)
 {
 	hash_table_t *ht;
