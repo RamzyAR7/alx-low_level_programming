@@ -2,8 +2,6 @@
 
 shash_table_t *shash_table_create(unsigned long int size);
 int shash_table_set(shash_table_t *ht, const char *key, const char *value);
-int add_new_node_php(shash_table_t *ht, const char *key,
-					 const char *value, unsigned long int idx, shash_node_t *tmp);
 char *shash_table_get(const shash_table_t *ht, const char *key);
 void shash_table_print(const shash_table_t *ht);
 void shash_table_print_rev(const shash_table_t *ht);
@@ -53,7 +51,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int idx;
-	shash_node_t *tmp;
+	shash_node_t *tmp, *new;
 
 	if (ht == NULL || key == NULL || value == NULL)
 		return (0);
@@ -75,22 +73,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		}
 		tmp = tmp->snext;
 	}
-
-	return (add_new_node_php(ht, key, value, idx, tmp));
-}
-/**
- * add_new_node - Adds a new node to the hash table.
- * @ht: The hash table to add the node to.
- * @key: The key string.
- * @value: The value associated with the key.
- * @idx: The index of the array where the node should be added.
- * @tmp: tmp pointer
- * Return: 1 if successful, 0 otherwise.
- */
-int add_new_node_php(shash_table_t *ht, const char *key,
-					 const char *value, unsigned long int idx, shash_node_t *tmp)
-{
-	shash_node_t *new;
 
 	new = malloc(sizeof(shash_node_t));
 	if (new == NULL)
