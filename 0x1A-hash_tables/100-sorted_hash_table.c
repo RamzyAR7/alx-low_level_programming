@@ -3,7 +3,7 @@
 shash_table_t *shash_table_create(unsigned long int size);
 int shash_table_set(shash_table_t *ht, const char *key, const char *value);
 int add_new_node_php(shash_table_t *ht, const char *key,
-				 const char *value, unsigned long int idx, shash_node_t *tmp);
+					 const char *value, unsigned long int idx, shash_node_t *tmp);
 char *shash_table_get(const shash_table_t *ht, const char *key);
 void shash_table_print(const shash_table_t *ht);
 void shash_table_print_rev(const shash_table_t *ht);
@@ -88,7 +88,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
  * Return: 1 if successful, 0 otherwise.
  */
 int add_new_node_php(shash_table_t *ht, const char *key,
-				 const char *value, unsigned long int idx, shash_node_t *tmp)
+					 const char *value, unsigned long int idx, shash_node_t *tmp)
 {
 	shash_node_t *new;
 
@@ -138,7 +138,6 @@ int add_new_node_php(shash_table_t *ht, const char *key,
 			tmp->snext->sprev = new;
 		tmp->snext = new;
 	}
-
 	return (1);
 }
 
