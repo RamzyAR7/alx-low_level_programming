@@ -59,5 +59,8 @@
   "editor.defaultFormatter": "moufidayoub11.betty-extension",
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   }
 }
